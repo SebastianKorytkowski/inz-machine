@@ -1,7 +1,14 @@
+import datetime
 import json
 import requests
+import time
 
 settings = json.load(open('data.json'))
-r = requests.get(settings['address'])
 
-print(r.content)
+
+while True:
+    data = {"timestamp": datetime.datetime.now().isoformat()}
+    r = requests.post(settings['address'] + "/logs/machine/" + settings['id'], {"jsonData": json.dumps(data)})
+    print(r.content)
+    time.sleep(1.0)
+
