@@ -16,6 +16,15 @@ while True:
         "cpuUsage": cpu,
         "ramUsage": ram
     }
-    r = requests.post(address + "/logs/machine/" + id, {"jsonData": json.dumps(data), "identityProof":identityProof})
+
+    fulldata = {
+        "jsonData": json.dumps(data),
+        "identityProof": identityProof
+    }
+    print("Wysłane dane:")
+    print(fulldata)
+
+    r = requests.post(address + "/logs/machine/" + id, fulldata)
+    print("Odpowiedź:")
     print(r.content)
     time.sleep(1.0)
